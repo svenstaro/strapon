@@ -1,0 +1,5 @@
+class RecourceManager
+{
+	RecourceManager();
+	~RecourceManager();
+}
