@@ -28,16 +28,15 @@ public:
 	}
 
 	/***/
-	bool load_surface(
-		std::string &key,
-		const char* path,
-		SDL_Renderer *ren)
+	bool load_surface(const std::string &key,
+					  const std::string &path,
+					  SDL_Renderer *ren)
 	{
 		SDL_Texture *texture;
-		texture = IMG_LoadTexture(ren,path);
+		texture = IMG_LoadTexture(ren, path.c_str());
 		if(!texture)
 		{
-   			printf("IMG_Load: %s\n", IMG_GetError());
+   			std::cerr << "IMG_Load:" << IMG_GetError() << std::endl;
    			return false;
 		}
 		m_textures[key] = texture;
@@ -45,12 +44,12 @@ public:
 	}
 	
 	/***/
-	bool load_sound(std::string key, char* path)
+	bool load_sound(std::string key, std::string &path)
 	{
-		Mix_Chunk *new_sound = Mix_LoadWAV(path);
+		Mix_Chunk *new_sound = Mix_LoadWAV(path.c_str());
 		if(new_sound == NULL)
 		{
-			printf("Error: could not load sound from %s\n", path);
+			std::cerr << "Error: could not load sound from" << path << std::endl;
 			return false;
 		}
 		m_sounds[key] = new_sound;
@@ -60,25 +59,25 @@ public:
 	/***/
 	SDL_Texture* get_const_texture(std::string texture_key) 
 	{
-		return m_textures[texture_key];
+		return m_textures.at(texture_key);
 	}
 
 	/***/
 	SDL_Texture* get_texture(std::string texture_key) 
 	{
-		return m_textures[texture_key];
+		return m_textures.at(texture_key);
 	}
 
 	/***/
 	Mix_Chunk* get_const_sound(std::string sound_key) 
 	{
-		return m_sounds[sound_key];
+		return m_sounds.at(sound_key);
 	}
 	
 	/***/
 	Mix_Chunk* get_sound(std::string sound_key) 
 	{
-		return m_sounds[sound_key];
+		return m_sounds.at(sound_key);
 	}
 
 private:
