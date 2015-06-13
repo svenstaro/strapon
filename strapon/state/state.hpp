@@ -4,7 +4,7 @@
 class State {
 public:
     virtual int init() = 0;
-    virtual void update(float dt) = 0;
+    virtual void update(double dt) = 0;
     virtual ~State() {};
 };
 
