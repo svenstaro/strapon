@@ -5,7 +5,7 @@ class State {
 public:
     virtual int init() = 0;
     virtual void update(float dt) = 0;
-    virtual ~State() = 0;
+    virtual ~State() {};
 };
 
 #endif /* end of include guard: STATE_HPP */
