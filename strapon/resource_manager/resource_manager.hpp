@@ -5,7 +5,11 @@
 #include <string>
 #include <map>
 #include <SDL2/SDL_image.h>
+#ifdef __EMSCRIPTEN__
+#include <SDL/SDL_mixer.h>
+#else
 #include <SDL2/SDL_mixer.h>
+#endif
 
 class ResourceManager
 {
