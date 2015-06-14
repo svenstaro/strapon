@@ -24,6 +24,10 @@ public:
 		for(auto e : m_sounds) {
 			Mix_FreeChunk(e.second);
 		}
+
+		for(auto e : m_music) {
+			Mix_FreeMusic(e.second);
+		}
 	}
 
 	/***/
