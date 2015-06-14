@@ -1,6 +1,7 @@
 #ifndef RESOURCE_MANAGER_HPP
 #define RESOURCE_MANAGER_HPP
 
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <string>
 #include <map>
@@ -12,18 +13,15 @@
 #include <SDL2/SDL_mixer.h>
 #endif
 
-class ResourceManager
-{
-public:
-	/***/
-	ResourceManager() {}
-
+class ResourceManager {
+public:	
 	/***/
 	~ResourceManager() {
 		for(auto e : m_textures)
 		{
 			SDL_DestroyTexture(e.second);
 		}
+
 		for(auto e : m_sounds)
 		{
 			Mix_FreeChunk(e.second);
