@@ -7,6 +7,7 @@
 #include <map>
 #include <iostream>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #ifdef __EMSCRIPTEN__
 #include <SDL/SDL_mixer.h>
 #else
@@ -27,6 +28,10 @@ public:
 
         for(auto e : m_music) {
             Mix_FreeMusic(e.second);
+        }
+
+        for(auto e : m_fonts) {
+            TTF_CloseFont(e.second);
         }
     }
 
@@ -64,7 +69,7 @@ public:
         Mix_Music *new_music = Mix_LoadMUS(path.c_str());
 
         if (new_music == NULL) {
-            std::cerr << "Error: could not load sound from " << path << ": "<< Mix_GetError() << std::endl;
+            std::cerr << "Error: could not load music from " << path << ": "<< Mix_GetError() << std::endl;
             return false;
         }
 
@@ -73,24 +78,43 @@ public:
     }
 
     /***/
-    SDL_Texture* get_texture(std::string texture_key) {
-        return m_textures.at(texture_key);
+    bool load_font(const std::string &key, const std::string &path, int size) {
+        TTF_Font *new_font = TTF_OpenFont(path.c_str(), size);
+
+        if (new_font == NULL) {
+            std::cerr << "Error: could not load font from " << path << ": "<< TTF_GetError() << std::endl;
+            return false;
+        }
+
+        m_fonts[key] = new_font;
+        return true;
     }
 
     /***/
-    Mix_Chunk* get_sound(std::string sound_key) {
-        return m_sounds.at(sound_key);
+    SDL_Texture *get_texture(std::string key) {
+        return m_textures.at(key);
     }
 
     /***/
-    Mix_Music* get_music(std::string music_key) {
-        return m_music.at(music_key);
+    Mix_Chunk *get_sound(std::string key) {
+        return m_sounds.at(key);
+    }
+
+    /***/
+    Mix_Music *get_music(std::string key) {
+        return m_music.at(key);
+    }
+
+    /***/
+    TTF_Font *get_font(std::string key) {
+        return m_fonts.at(key);
     }
 
 private:
     std::map<std::string, SDL_Texture*> m_textures;
     std::map<std::string, Mix_Chunk*> m_sounds;
     std::map<std::string, Mix_Music*> m_music;
+    std::map<std::string, TTF_Font*> m_fonts;
 };
 
 #endif
