@@ -13,7 +13,6 @@
 #include <SDL2/SDL_mixer.h>
 #endif
 
-<<<<<<< HEAD
 
 class ResourceManager
 {
