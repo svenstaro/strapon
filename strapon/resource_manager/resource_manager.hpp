@@ -16,7 +16,7 @@
 class ResourceManager {
 public:	
 	/***/
-	~ResourceManager() {
+	void shutdown() {
 		for(auto e : m_textures) {
 			SDL_DestroyTexture(e.second);
 		}
