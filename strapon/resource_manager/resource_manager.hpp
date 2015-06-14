@@ -27,7 +27,7 @@ public:
 	}
 
 	/***/
-	bool load_surface(const std::string &key,
+	bool load_texture(const std::string &key,
 					  const std::string &path,
 					  SDL_Renderer *ren) {
 		SDL_Texture *texture;
