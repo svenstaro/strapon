@@ -13,6 +13,7 @@
 #include <SDL2/SDL_mixer.h>
 #endif
 
+<<<<<<< HEAD
 
 class ResourceManager
 {
@@ -90,9 +91,9 @@ public:
 	}
 
 private:
-	std::map<std::string, SDL_Texture*> m_textures;
-	std::map<std::string, Mix_Chunk*> m_sounds;
-	std::map<std::string, Mix_Music*> m_music;
+    std::map<std::string, SDL_Texture*> m_textures;
+    std::map<std::string, Mix_Chunk*> m_sounds;
+    std::map<std::string, Mix_Music*> m_music;
 };
 
 #endif
