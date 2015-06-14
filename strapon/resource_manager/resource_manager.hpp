@@ -14,7 +14,7 @@
 
 class ResourceManager
 {
-public:	
+public:
 	/***/
 	~ResourceManager()
 	{
