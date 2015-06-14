@@ -43,7 +43,7 @@ public:
 	}
 
 	/***/
-	bool load_sound(std::string key, std::string &path) {
+	bool load_sound(const std::string &key, const std::string &path) {
 		Mix_Chunk *new_sound = Mix_LoadWAV(path.c_str());
 
 		if (new_sound == NULL) {
@@ -56,7 +56,7 @@ public:
 	}
 
 	/***/
-	bool load_music(std::string key, std::string &path) {
+	bool load_music(const std::string &key, const std::string &path) {
 		Mix_Music *new_music = Mix_LoadMUS(path.c_str());
 
 		if (new_music == NULL) {
