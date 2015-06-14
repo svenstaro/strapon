@@ -1,6 +1,7 @@
 #ifndef RESOURCE_MANAGER_HPP
 #define RESOURCE_MANAGER_HPP
 
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <string>
 #include <map>
@@ -13,11 +14,7 @@
 
 class ResourceManager
 {
-public:
-
-	/***/
-	ResourceManager(){}
-	
+public:	
 	/***/
 	~ResourceManager()
 	{
@@ -25,6 +22,7 @@ public:
 		{
 			SDL_DestroyTexture(e.second);
 		}
+
 		for(auto e : m_sounds)
 		{
 			Mix_FreeChunk(e.second);
@@ -43,6 +41,7 @@ public:
    			std::cerr << "IMG_Load:" << IMG_GetError() << std::endl;
    			return false;
 		}
+
 		m_textures[key] = texture;
 		return true;
 	}
