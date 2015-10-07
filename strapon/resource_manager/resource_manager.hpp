@@ -16,30 +16,28 @@
 #endif
 
 class ResourceManager {
-public: 
+  public:
     /***/
     void shutdown() {
-        for(auto e : m_textures) {
+        for (auto e : m_textures) {
             SDL_DestroyTexture(e.second);
         }
 
-        for(auto e : m_sounds) {
+        for (auto e : m_sounds) {
             Mix_FreeChunk(e.second);
         }
 
-        for(auto e : m_music) {
+        for (auto e : m_music) {
             Mix_FreeMusic(e.second);
         }
 
-        for(auto e : m_fonts) {
+        for (auto e : m_fonts) {
             TTF_CloseFont(e.second);
         }
     }
 
     /***/
-    bool load_texture(const std::string &key,
-                      const std::string &path,
-                      SDL_Renderer *ren) {
+    bool load_texture(const std::string &key, const std::string &path, SDL_Renderer *ren) {
         SDL_Texture *texture;
         texture = IMG_LoadTexture(ren, path.c_str());
 
@@ -56,7 +54,7 @@ public:
     bool load_sound(const std::string &key, const std::string &path) {
         Mix_Chunk *new_sound = Mix_LoadWAV(path.c_str());
 
-        if (new_sound == NULL) {
+        if (new_sound == nullptr) {
             std::cerr << "Error: could not load sound from" << path << std::endl;
             return false;
         }
@@ -69,8 +67,9 @@ public:
     bool load_music(const std::string &key, const std::string &path) {
         Mix_Music *new_music = Mix_LoadMUS(path.c_str());
 
-        if (new_music == NULL) {
-            std::cerr << "Error: could not load music from " << path << ": "<< Mix_GetError() << std::endl;
+        if (new_music == nullptr) {
+            std::cerr << "Error: could not load music from " << path << ": " << Mix_GetError()
+                      << std::endl;
             return false;
         }
 
@@ -82,8 +81,9 @@ public:
     bool load_font(const std::string &key, const std::string &path, int size) {
         TTF_Font *new_font = TTF_OpenFont(path.c_str(), size);
 
-        if (new_font == NULL) {
-            std::cerr << "Error: could not load font from " << path << ": "<< TTF_GetError() << std::endl;
+        if (new_font == nullptr) {
+            std::cerr << "Error: could not load font from " << path << ": " << TTF_GetError()
+                      << std::endl;
             return false;
         }
 
@@ -92,30 +92,30 @@ public:
     }
 
     /***/
-    SDL_Texture *get_texture(std::string key) {
+    SDL_Texture *texture(std::string key) {
         return m_textures.at(key);
     }
 
     /***/
-    Mix_Chunk *get_sound(std::string key) {
+    Mix_Chunk *sound(std::string key) {
         return m_sounds.at(key);
     }
 
     /***/
-    Mix_Music *get_music(std::string key) {
+    Mix_Music *music(std::string key) {
         return m_music.at(key);
     }
 
     /***/
-    TTF_Font *get_font(std::string key) {
+    TTF_Font *font(std::string key) {
         return m_fonts.at(key);
     }
 
-private:
-    std::map<std::string, SDL_Texture*> m_textures;
-    std::map<std::string, Mix_Chunk*> m_sounds;
-    std::map<std::string, Mix_Music*> m_music;
-    std::map<std::string, TTF_Font*> m_fonts;
+  private:
+    std::map<std::string, SDL_Texture *> m_textures;
+    std::map<std::string, Mix_Chunk *> m_sounds;
+    std::map<std::string, Mix_Music *> m_music;
+    std::map<std::string, TTF_Font *> m_fonts;
 };
 
 #endif
