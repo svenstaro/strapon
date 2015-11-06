@@ -2,17 +2,18 @@
 #define RESOURCE_MANAGER_HPP
 
 #include <iostream>
-#include <SDL2/SDL.h>
 #include <string>
 #include <map>
 #include <iostream>
-#include <SDL2/SDL_image.h>
+
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+
 #ifdef __EMSCRIPTEN__
 #include <SDL/SDL_mixer.h>
-#include <SDL/SDL_ttf.h>
 #else
-#include <SDL2/SDL_mixer.h>
-#include <SDL2/SDL_ttf.h>
+#include <SDL_mixer.h>
 #endif
 
 class ResourceManager {
