@@ -21,12 +21,13 @@ static void draw_text(SDL_Renderer *renderer, ResourceManager resource_manager, 
 }
 
 static void draw_text(SDL_Renderer *renderer, ResourceManager resource_manager, std::string text,
-                      std::string font_key, int x_pos, int y_pos, int char_width, int char_height,
-                      SDL_Color color) {
-    SDL_Rect rect{x_pos, y_pos, char_width * int(text.length()), char_height};
+                      std::string font_key, int x_pos, int y_pos, SDL_Color color) {
     SDL_Surface *text_surface =
         TTF_RenderText_Blended(resource_manager.font(font_key), text.c_str(), color);
     SDL_Texture *text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
+    int w, h;
+    SDL_QueryTexture(text_texture, nullptr, nullptr, &w, &h);
+    SDL_Rect rect{x_pos, y_pos, w, h};
     SDL_RenderCopy(renderer, text_texture, nullptr, &rect);
     SDL_FreeSurface(text_surface);
     SDL_DestroyTexture(text_texture);
