@@ -2,6 +2,9 @@
 
 #include "main_state.hpp"
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
 #include <iostream>
 
 Game::~Game() {
@@ -96,6 +99,9 @@ bool Game::is_running() {
 
 void Game::shutdown() {
     m_running = false;
+#ifdef __EMSCRIPTEN__
+    emscripten_cancel_main_loop();
+#endif
 }
 
 void Game::popstate() {
